@@ -1,0 +1,1 @@
+$(document).ready((function(o){var c=o(".cd-top");o(window).scroll((function(){o(this).scrollTop()>300?c.addClass("cd-is-visible"):c.removeClass("cd-is-visible cd-fade-out")})),c.on("click",(function(c){c.preventDefault(),o("body,html").animate({scrollTop:0},200)}))}));

@@ -6,7 +6,7 @@
   <link href="https://hfanss.com/atom.xml" rel="self"/>
   
   <link href="https://hfanss.com/"/>
-  <updated>2025-07-01T09:03:19.394Z</updated>
+  <updated>2025-07-03T02:22:58.767Z</updated>
   <id>https://hfanss.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>github在线图床</title>
+    <link href="https://hfanss.com/2025/github%E5%9C%A8%E7%BA%BF%E5%9B%BE%E5%BA%8A.html"/>
+    <id>https://hfanss.com/2025/github%E5%9C%A8%E7%BA%BF%E5%9B%BE%E5%BA%8A.html</id>
+    <published>2025-07-03T01:23:22.000Z</published>
+    <updated>2025-07-03T02:22:58.767Z</updated>
+    
+    <content type="html"><![CDATA[<p>github做的图床，原理是利用github API实现的在线上传，就一个页面，css和js都是集成在页面，相关信息保存在浏览器缓存中，配置一下即可使用</p><p>效果演示：</p><p>打开网站填写下列信息</p><p><img src="https://gcore.jsdelivr.net/gh/hfanss2/githubpic@master/blog/126.jpg" alt=""></p><p>github用户名：用户名</p><p>仓库名：做图床的专用仓库的名称</p><p>分支名称：分支名称</p><p>存储路径：上传到的目标仓库位置的路径，不填则上传到根目录，填一个不存在的则会新建，开头和结尾不需要/分割，</p><p>github访问令牌：token,没有的话可以点击创建令牌新建</p><p>点击保存配置是将配置保存在浏览器中，清除浏览器缓存后必须重新设置</p><p>上传成功后是这样，图片会重新命名，会默认返回jsdelivr的CDN地址，并且自动复制在剪切板，</p><p><img src="https://gcore.jsdelivr.net/gh/hfanss2/githubpic@master/blog/127.jpg" alt=""></p><p>想要使用该图床需具备下面要求</p><p>1.一个专门用作图床的github仓库</p><p>随便创建一个就行，不用开启pages,专门用来做图床使用</p><p>2.创建1个github token</p><p>创建一个token,权限可以自己斟酌，小白可以全选上</p><p>3.在页面将信息保存即可使用</p><p>在网站填写信息保存，即可开启上传之旅</p><p>支持自定义，fork本项目至自己仓库，使用netlify部署，并搭配自定义域名即可实现自己的在线图床，参考文章：<a href="https://hfanss.com/2025/github%20pages%E4%BD%BF%E7%94%A8%E5%85%8D%E8%B4%B9cdn%E5%8A%A0%E9%80%9F-netlify" target="_blank">netlify加速github pages</a></p><p>项目资源全部集成在html中，fork后可自行修改，比如利用cloud flare的数据库做成可登录的，或者设置密码只能本人使用</p><p>等等。。。相信广大网友的diy能力应该很强</p><p>项目地址：<a href="https://github.com/hfanss2/pic-upload" target="_blank">github地址</a></p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;github做的图床，原理是利用github API实现的在线上传，就一个页面，css和js都是集成在页面，相关信息保存在浏览器缓存中，配置一下即可使用&lt;/p&gt;
+&lt;p&gt;效果演示：&lt;/p&gt;
+&lt;p&gt;打开网站填写下列信息&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://gcor</summary>
+      
+    
+    
+    
+    <category term="免费图床" scheme="https://hfanss.com/categories/%E5%85%8D%E8%B4%B9%E5%9B%BE%E5%BA%8A/"/>
+    
+    
+    <category term="github图床" scheme="https://hfanss.com/tags/github%E5%9B%BE%E5%BA%8A/"/>
+    
+    <category term="在线图床" scheme="https://hfanss.com/tags/%E5%9C%A8%E7%BA%BF%E5%9B%BE%E5%BA%8A/"/>
+    
+    <category term="在线github图床" scheme="https://hfanss.com/tags/%E5%9C%A8%E7%BA%BFgithub%E5%9B%BE%E5%BA%8A/"/>
+    
+    <category term="免费图床" scheme="https://hfanss.com/tags/%E5%85%8D%E8%B4%B9%E5%9B%BE%E5%BA%8A/"/>
+    
+  </entry>
   
   <entry>
     <title>github pages使用免费CDN加速-netlify</title>
@@ -539,32 +572,6 @@
     
     
     <category term="学习记录" scheme="https://hfanss.com/categories/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="Java" scheme="https://hfanss.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Tomcat配置ssl证书</title>
-    <link href="https://hfanss.com/2019/Tomcat%E9%85%8D%E7%BD%AEssl%E8%AF%81%E4%B9%A6.html"/>
-    <id>https://hfanss.com/2019/Tomcat%E9%85%8D%E7%BD%AEssl%E8%AF%81%E4%B9%A6.html</id>
-    <published>2019-01-10T12:29:38.000Z</published>
-    <updated>2025-06-26T08:15:10.100Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近搞这个https搞的头疼，百度下载的ssl证书没有密码，纠结了很久</p><p>特开贴记录一下，希望后来的同学们少走点弯路</p><h2 id="下载证书"><a href="#下载证书" class="headerlink" title="下载证书"></a>下载证书</h2><p>这里以百度云为例（网上阿里的有很多教程，这里就不多赘述）</p><p><a href="javascript:void(0"><img src="https://gcore.jsdelivr.net/gh/hfanss2/githubpic@master/blog/037.jpg" alt="img"></a>;)</p><p><a href="javascript:void(0"><img src="https://gcore.jsdelivr.net/gh/hfanss2/githubpic@master/blog/038.jpg" alt="img"></a>;)</p><p><a href="javascript:void(0"><img src="https://gcore.jsdelivr.net/gh/hfanss2/githubpic@master/blog/039.jpg" alt="img"></a>;)</p><p>这个密码就是证书的密码，起初我一直以为就是解压密码，最后问过百度客服才知道就是证书密码</p><h2 id="配置tomcat"><a href="#配置tomcat" class="headerlink" title="配置tomcat"></a>配置tomcat</h2><p>1.将下载下来的后缀为jks的证书放入tomcat的conf目录下</p><p>2.打开该目录下的server.xml，添加以下内容</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector port=&quot;443&quot; protocol=&quot;org.apache.coyote.http11.Http11NioProtocol&quot; maxThreads=&quot;150&quot; SSLEnabled=&quot;true&quot; scheme=&quot;https&quot; secure=&quot;true&quot; keystoreFile=&quot;证书绝对路径&quot; keystorePass=&quot;证书密码&quot; clientAuth=&quot;false&quot; sslProtocol=&quot;TLS&quot; /&gt;</span><br></pre></td></tr></table></figure><p>另外修改原有内容</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector port=&quot;8080&quot; protocol=&quot;HTTP/1.1&quot;</span><br><span class="line">               connectionTimeout=&quot;20000&quot;</span><br><span class="line">               redirectPort=&quot;8443&quot; /&gt;</span><br><span class="line">&lt;Connector port=&quot;8009&quot; protocol=&quot;AJP/1.3&quot; redirectPort=&quot;8443&quot; /&gt;</span><br></pre></td></tr></table></figure><p>修改为</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Connector port=&quot;80&quot; protocol=&quot;HTTP/1.1&quot;</span><br><span class="line">               connectionTimeout=&quot;20000&quot;</span><br><span class="line">               redirectPort=&quot;443&quot; /&gt;</span><br><span class="line">&lt;Connector port=&quot;8009&quot; protocol=&quot;AJP/1.3&quot; redirectPort=&quot;443&quot; /&gt;</span><br></pre></td></tr></table></figure><p>OK后，重启下tomcat，进入<a href="https://localhost">https://localhost</a>会跳转到<a href="https://localhost">https://localhost</a></p><p><a href="javascript:void(0"><img src="https://gcore.jsdelivr.net/gh/hfanss2/githubpic@master/blog/040.jpg" alt="img"></a>;)</p><h2 id="如果部署的是java-web项目，还需要以下配置"><a href="#如果部署的是java-web项目，还需要以下配置" class="headerlink" title="如果部署的是java web项目，还需要以下配置"></a>如果部署的是java web项目，还需要以下配置</h2><p>tomcat/conf/server.xml</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;Context path=&quot;/&quot; reloadable=&quot;true&quot; docBase=&quot;项目绝对路径&quot; /&gt;    </span><br></pre></td></tr></table></figure><p>web项目的web.xml中还需要更改（包含在根标签内，</web-app>之上）</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 跳转https --&gt;  </span><br><span class="line">    &lt;security-constraint&gt;  </span><br><span class="line">         &lt;web-resource-collection &gt;  </span><br><span class="line">            &lt;web-resource-name &gt;SSL&lt;/web-resource-name&gt;  </span><br><span class="line">            &lt;url-pattern&gt;/*&lt;/url-pattern&gt;  </span><br><span class="line">        &lt;/web-resource-collection&gt;  </span><br><span class="line">        &lt;user-data-constraint&gt;  </span><br><span class="line">            &lt;transport-guarantee&gt;CONFIDENTIAL&lt;/transport-guarantee&gt;  </span><br><span class="line">        &lt;/user-data-constraint&gt;  </span><br><span class="line">    &lt;/security-constraint&gt;</span><br></pre></td></tr></table></figure><p>此配置目的：将所有请求转为https</p><p>OK，大功告成，重启tomcat，访问localhost就可以看到效果了</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;最近搞这个https搞的头疼，百度下载的ssl证书没有密码，纠结了很久&lt;/p&gt;
-&lt;p&gt;特开贴记录一下，希望后来的同学们少走点弯路&lt;/p&gt;
-&lt;h2 id=&quot;下载证书&quot;&gt;&lt;a href=&quot;#下载证书&quot; class=&quot;headerlink&quot; title=&quot;下载证书&quot;&gt;&lt;/a&gt;下载</summary>
-      
-    
-    
-    
-    <category term="Tomcat" scheme="https://hfanss.com/categories/Tomcat/"/>
     
     
     <category term="Java" scheme="https://hfanss.com/tags/Java/"/>

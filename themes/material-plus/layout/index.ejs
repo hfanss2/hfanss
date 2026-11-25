@@ -1,0 +1,20 @@
+<script>
+  // 线上强制 HTTPS；本地/内网预览不跳转，避免 127.0.0.1 出现 ERR_SSL_PROTOCOL_ERROR
+  if (location.protocol === 'http:' &&
+      !/^(localhost|127\.0\.0\.1|\[::1\]|192\.168\.|10\.|172\.(1[6-9]|2\d|3[01])\.)/.test(location.hostname)) {
+    location.replace(location.href.replace(/^http:/, 'https:'));
+  }
+</script>
+
+<% if (page.prev == 0) { %>
+<%- partial('_partial/profile') %>
+
+<% if (theme.topnotice && theme.topnotice.enable === true) { %>
+<div class="notice-bar">
+  <svg class="icon" aria-hidden="true"><use href="#i-bell"></use></svg>
+  <a href="<%= theme.topnotice.link %>"><%= theme.topnotice.content %></a>
+</div>
+<% } %>
+<% } %>
+
+<%- partial('_partial/archive') %>

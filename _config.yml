@@ -1,0 +1,109 @@
+# 【说明·已用】注释规范：下面每一个非空行都标注了「【已用】/【未用】+ 该行控制什么」；已用 = Hexo 核心、已装插件或主题模板确实会读取。
+# 【说明·已用】本文件只放 Hexo 核心与第三方插件必需项；外观/导航/组件等展示层设置全部在 themes/material-plus/_config.yml。
+
+# 【章节·已用】1. 站点基本信息：head.ejs / header.ejs / article.ejs / footer.ejs 读取
+CNAME: hfanss.com                    # 【已用】hexo-generator-cname 生成 CNAME 文件，防止每次部署后自定义域名丢失
+title: 幻凡ss                        # 【已用】站点名，用于浏览器标题后缀、页脚与文章分享标题
+description: 专注Java • 分享生活 • 记录人生  # 【已用】meta description；个人简介格言缺省时的兜底文案
+keywords: java,IT,幻凡ss,幻凡        # 【已用】meta keywords，页面未单独设置 keywords 时生效
+language: zh-CN                     # 【已用】<html lang> 语言标记
+
+# 【章节·已用】2. URL 与永久链接：Hexo 核心读取
+url: https://hfanss.com              # 【已用】站点根地址，生成绝对链接、sitemap 与分享链接
+root: /                             # 【已用】站点根路径，url_for() 据此生成资源路径
+permalink: :year/:title.html        # 【已用】文章永久链接格式（年份/标题.html）
+permalink_defaults:                 # 【未用】永久链接默认值，留空即使用 Hexo 默认，无自定义映射
+
+# 【章节·已用】3. 目录：Hexo 核心与各生成器读取
+source_dir: source                  # 【已用】源文件目录，Hexo 从这里读取 _posts 与页面
+public_dir: public                  # 【已用】静态站点输出目录，generate 产物写入这里
+tag_dir: tags                       # 【已用】标签页生成目录，hexo-generator-tag 使用
+archive_dir: archives               # 【已用】归档页生成目录，hexo-generator-archive 使用
+category_dir: categories            # 【已用】分类页生成目录，hexo-generator-category 使用
+code_dir: downloads/code            # 【已用】代码下载目录（Hexo 保留项），本站未放文件但配置有效
+i18n_dir: :lang                     # 【未用】多语言目录规则，本站只有一个 zh-CN 语言
+skip_render:                        # 【未用】跳过渲染的文件列表，留空表示不跳过
+
+# 【章节·已用】4. 写作：Hexo 核心与 marked 渲染器读取
+new_post_name: :title.md            # 【已用】新建文章的文件名模板（hexo new 使用）
+default_layout: post                # 【已用】新建文章默认布局为 post
+titlecase: false                    # 【已用】不自动把标题转成英文 Title Case
+external_link: true                 # 【已用】外链处理开关，影响正文中外部链接的渲染
+filename_case: 0                    # 【已用】文件名大小写规则，0 表示不转换
+render_drafts: false                # 【已用】是否渲染草稿，false 表示不发布草稿
+post_asset_folder: false            # 【已用】是否为每篇文章建立同名资源文件夹
+relative_link: false                # 【已用】是否生成相对链接；layout.ejs 也用它决定片段缓存策略
+future: true                        # 【已用】允许发布未来日期的文章
+
+# 【章节·已用】5. 代码高亮：Hexo 内置 highlight 渲染器读取
+highlight:                          # 【已用】代码高亮配置组
+  enable: true                      # 【已用】开启代码高亮
+  line_number: true                 # 【已用】显示代码行号
+  auto_detect: false                # 【已用】不自动探测语言，避免误判
+  tab_replace:                      # 【未用】Tab 替换字符，留空表示保持原样
+
+# 【章节·已用】6. 首页 / 分类 / 时间：Hexo 核心与生成器读取
+index_generator:                    # 【已用】首页文章列表生成器配置组
+  path: ''                          # 【已用】首页路径为空，即站点根 /
+  per_page: 10                      # 【已用】首页每页展示 10 篇文章
+  order_by: -date                   # 【已用】按日期倒序排列
+default_category: uncategorized     # 【已用】文章未写分类时的默认分类名
+category_map:                       # 【未用】分类名映射，留空表示不做映射
+tag_map:                            # 【未用】标签名映射，留空表示不做映射
+date_format: YYYY-MM-DD-dddd        # 【已用】日期格式；archive.ejs 在文章无标题时用它兜底
+time_format: HH:mm:ss               # 【未用】时间格式，当前模板未读取
+per_page: 10                        # 【已用】归档/分类/标签页每页文章数
+pagination_dir: page                # 【已用】分页目录名，生成 /page/2/ 这类地址
+
+# 【章节·已用】7. 主题：Hexo 核心读取
+theme: material-plus                # 【已用】指定使用 themes/material-plus 主题（改造后的单栏版式）
+
+# 【章节·已用】8. 第三方插件配置：这些插件直接读 hexo.config（站点级），不能移到主题配置
+sitemap:                            # 【已用】hexo-generator-sitemap 配置组
+  path: sitemap.xml                 # 【已用】生成的站点地图文件名
+search:                             # 【已用】hexo-generator-search 配置组（生成索引文件，非页面按钮开关）
+  path: search.xml                  # 【已用】搜索索引文件输出路径，site.js 首次搜索时请求它
+  field: post                       # 【已用】索引范围只包含文章（不含页面）
+baidu_url_submit:                   # 【已用】hexo-baidu-url-submit 配置组
+  count: 10                         # 【已用】每次向百度提交的最多链接数
+  host: hfanss.com                  # 【已用】提交链接所用主机名
+  token: VpavqEmMn3wbiTEk          # 【已用】百度站长平台提交令牌（敏感信息，勿外传）
+  path: baidu_urls.txt              # 【已用】待提交 URL 列表文件名
+recommended_posts:                  # 【已用】hexo-recommended-posts 配置组（关闭自动注入，由模板手动渲染）
+  autoDisplay: false                # 【已用】false = 插件不自动往文章尾部插入推荐位
+  server: https://api.truelaurel.com  # 【已用】推荐接口地址，执行 hexo recommend 时使用
+  timeoutInMillis: 10000            # 【已用】推荐接口超时时间（毫秒）
+  excludePattern: []                # 【已用】排除的文章路径规则，空数组表示不排除
+  titleHtml: <h4>推荐文章</h4>      # 【已用】插件自动模式下的推荐栏标题（当前自动模式已关闭）
+  internalLinks: 3                  # 【已用】推荐结果中的站内链接数量
+  externalLinks: 2                  # 【已用】推荐结果中的站外链接数量
+  fixedNumber: false                # 【已用】是否强制补足固定条数
+encrypt:                            # 【已用】hexo-blog-encrypt 配置组
+  enable: true                      # 【已用】启用文章加密功能（文章 front-matter 写 password 时生效）
+all_minifier: false                 # 【未用】旧版压缩插件开关，当前压缩由 hexo-yam 的 minify.* 负责
+image_minifier:                     # 【未用】旧版图片压缩配置组，未被任何已装插件读取
+  enable: false                     # 【未用】旧版图片压缩开关，当前未启用
+css_minifier:                       # 【未用】旧版 CSS 压缩配置组，未被任何已装插件读取
+  enable: false                     # 【未用】旧版 CSS 压缩开关，当前未启用
+google_api_key:                     # 【未用】旧版 Google 自定义搜索密钥，留空未使用
+google_engine_id:                   # 【未用】旧版 Google 搜索引擎 ID，留空未使用
+algolia_app_id:                     # 【未用】旧版 Algolia 搜索 App ID，留空未使用
+algolia_api_key:                    # 【未用】旧版 Algolia 搜索密钥，留空未使用
+algolia_index_name:                 # 【未用】旧版 Algolia 索引名，留空未使用
+azure_service_name:                 # 【未用】旧版 Azure 搜索服务名，留空未使用
+azure_index_name:                   # 【未用】旧版 Azure 搜索索引名，留空未使用
+azure_query_key:                    # 【未用】旧版 Azure 搜索查询密钥，留空未使用
+baidu_api_id:                       # 【未用】旧版百度搜索 API ID，留空未使用
+
+# 【章节·已用】9. 部署：hexo deploy 读取，按顺序推送到各目标
+deploy:                             # 【已用】部署目标列表
+##- type: git                         # 【已用】第 1 个目标：Git 部署方式
+##   repository: git@e.coding.net:HFanss/hfanss.git  # 【已用】CODING 仓库地址
+##   branch: master                    # 【已用】推送到 master 分支
+- type: git                         # 【已用】第 2 个目标：Git 部署方式
+  repository: git@github.com:hfanss2/hfanss.git  # 【已用】GitHub 仓库地址
+  branch: main                      # 【已用】推送到 main 分支
+- type: git                         # 【已用】第 3 个目标：Git 部署方式
+  repository: https://gitee.com/iyohei/iyohei.git  # 【已用】Gitee 仓库地址
+  branch: main                      # 【已用】推送到 main 分支
+- type: baidu_url_submitter         # 【已用】第 4 个目标：部署后向百度站长提交新链接

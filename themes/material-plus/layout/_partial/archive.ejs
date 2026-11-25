@@ -1,0 +1,28 @@
+<% if (is_category()) { %>
+<div class="list-heading">分类 · <span><%= page.category %></span></div>
+<% } %>
+<% if (is_tag()) { %>
+<div class="list-heading">标签 · <span><%= page.tag %></span></div>
+<% } %>
+
+<section class="post-list">
+  <% page.posts.each(function(post){ %>
+    <%- partial('post', {post: post}) %>
+  <% }) %>
+</section>
+
+<% if (page.total > 1) { %>
+<nav class="pagination" aria-label="分页">
+  <% if (page.prev != 0) { %>
+  <a class="pagination__btn" href="<%= url_for(page.prev_link) %>" rel="prev">
+    <svg class="icon" aria-hidden="true"><use href="#i-chev-left"></use></svg>上一页
+  </a>
+  <% } %>
+  <span class="pagination__current"><%= page.current %> / <%= page.total %></span>
+  <% if (page.next != 0) { %>
+  <a class="pagination__btn" href="<%= url_for(page.next_link) %>" rel="next">
+    下一页<svg class="icon" aria-hidden="true"><use href="#i-chev-right"></use></svg>
+  </a>
+  <% } %>
+</nav>
+<% } %>

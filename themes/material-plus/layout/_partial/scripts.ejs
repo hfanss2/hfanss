@@ -1,0 +1,22 @@
+<%
+  var siteCfg = {
+    root: config.root || '/',
+    searchPath: url_for('search.xml'),
+    baiduAnalytics: theme.baidu_analytics_key || '',
+    baiduPush: theme.baidu_push === true,
+    busuanzi: true,
+    changeTitle: theme.changeTitle || '',
+    valine: null
+  };
+  if (theme.valine && theme.valine.enable && theme.valine.appId && theme.valine.appkey) {
+    siteCfg.valine = {
+      appId: theme.valine.appId,
+      appKey: theme.valine.appkey,
+      avatar: theme.valine.avatar || 'monsterid',
+      placeholder: theme.valine.placeholder || '',
+      pageSize: theme.valine.pageSize || 10
+    };
+  }
+%>
+<script type="application/json" id="site-config"><%- JSON.stringify(siteCfg).replace(/</g, '\\u003c') %></script>
+<script defer src="<%- url_for('js/site.js') %>"></script>

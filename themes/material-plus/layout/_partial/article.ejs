@@ -1,0 +1,106 @@
+<%
+  var articleDate = date(post.date, 'YYYY-MM-DD');
+  var shareUrl = encodeURIComponent(page.permalink || url_for(page.path));
+  var shareTitle = encodeURIComponent('【' + post.title + ' - ' + config.title + '】');
+  var sharePic = encodeURIComponent(post.img || '');
+  var shareSummary = encodeURIComponent(String(post.zhailu || '').replace(/<[^>]*>/g, '').slice(0, 120));
+  var authorName = (theme.widgets && theme.widgets.author && theme.widgets.author.title) || config.title;
+  var showComments = post.comments !== false && theme.comments && theme.comments.enable !== false;
+%>
+<article class="post article" itemscope itemprop="blogPost">
+  <header class="article-head">
+    <h1 class="article-title"><%= post.title %></h1>
+    <% if (post.dtime !== false) { %>
+    <div class="article-meta">
+      <span class="meta-item">
+        <svg class="icon" aria-hidden="true"><use href="#i-calendar"></use></svg>
+        发表于 <time datetime="<%= articleDate %>"><%= articleDate %></time>
+      </span>
+      <span class="meta-item">
+        <svg class="icon" aria-hidden="true"><use href="#i-eye"></use></svg>
+        阅读（<span id="busuanzi_value_page_pv">…</span>）
+      </span>
+      <span class="meta-item">
+        <svg class="icon" aria-hidden="true"><use href="#i-user"></use></svg>
+        <%= authorName %>
+      </span>
+    </div>
+    <% } %>
+  </header>
+
+  <div class="article-entry typo" itemprop="articleBody">
+    <%- post.content %>
+    <%# 标签页：正文为空时补一个轻量标签云，避免只出现一个标题 %>
+    <% if (post.type === 'tags') { %>
+    <div class="tag-cloud">
+      <% site.tags.each(function(tag){ %>
+      <a href="<%- url_for(tag.path) %>"><%= tag.name %><span><%= tag.posts.length %></span></a>
+      <% }) %>
+    </div>
+    <% } %>
+  </div>
+
+  <footer class="article-foot">
+    <% if (post.latup !== false) { %>
+    <div class="post-copyright">
+      <span class="post-copyright__label">未经允许不得转载：</span>
+      <span class="post-copyright__site"><%= config.title %> »</span>
+      <span class="post-copyright__title"><%= post.title %></span>
+    </div>
+    <% } %>
+
+    <% if (post.share !== false) { %>
+    <div class="share">
+      <span class="share-label"><svg class="icon" aria-hidden="true"><use href="#i-share"></use></svg>分享到</span>
+      <a href="https://service.weibo.com/share/share.php?url=<%= shareUrl %>&amp;title=<%= shareTitle %>&amp;pic=<%= sharePic %>" target="_blank" rel="noopener">微博</a>
+      <a href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=<%= shareUrl %>&amp;title=<%= shareTitle %>&amp;pics=<%= sharePic %>&amp;summary=<%= shareSummary %>" target="_blank" rel="noopener">QQ空间</a>
+      <a href="https://connect.qq.com/widget/shareqq/index.html?url=<%= shareUrl %>&amp;title=<%= shareTitle %>&amp;pics=<%= sharePic %>" target="_blank" rel="noopener">QQ好友</a>
+    </div>
+    <% } %>
+
+    <% if (post.tags && post.tags.each) { %>
+    <div class="article-tags">
+      <% post.tags.each(function(item){ %>
+      <a href="<%- url_for(item.path) %>"><svg class="icon" aria-hidden="true"><use href="#i-tag"></use></svg><%= item.name %></a>
+      <% }) %>
+    </div>
+    <% } %>
+
+    <% if (post.prev || post.next) { %>
+    <nav class="prev-next" aria-label="上下篇文章">
+      <% if (post.prev) { %>
+      <a class="prev-next__item" href="<%= url_for(post.prev.path) %>" rel="prev">
+        <span class="prev-next__label"><svg class="icon" aria-hidden="true"><use href="#i-chev-left"></use></svg>上一篇</span>
+        <span class="prev-next__title"><%= post.prev.title || date(post.prev.date, 'YYYY-MM-DD') %></span>
+      </a>
+      <% } %>
+      <% if (post.next) { %>
+      <a class="prev-next__item prev-next__item--next" href="<%= url_for(post.next.path) %>" rel="next">
+        <span class="prev-next__label">下一篇<svg class="icon" aria-hidden="true"><use href="#i-chev-right"></use></svg></span>
+        <span class="prev-next__title"><%= post.next.title || date(post.next.date, 'YYYY-MM-DD') %></span>
+      </a>
+      <% } %>
+    </nav>
+    <% } %>
+  </footer>
+</article>
+
+<% if (showComments) { %>
+<section class="post comments-card" id="comments">
+  <% if (theme.recommend && theme.recommend.enable !== false && post.recommended_posts != false) { %>
+    <%- partial('post/recommended_posts', {page: post, site: site}) %>
+  <% } %>
+  <% if (theme.valine && theme.valine.enable && theme.valine.appId && theme.valine.appkey) { %>
+    <h2 class="comments-title"><svg class="icon" aria-hidden="true"><use href="#i-comment"></use></svg>发表评论</h2>
+    <%# 背景图挂在整个留言框容器上并 100% 铺满，评论输入框浮在图片之上 %>
+    <div class="comment-box<% if (!(theme.comments && theme.comments.bg)) { %> no-bg<% } %>">
+      <div id="vcomments"
+           data-app-id="<%= theme.valine.appId %>"
+           data-app-key="<%= theme.valine.appkey %>"
+           data-avatar="<%= theme.valine.avatar %>"
+           data-placeholder="<%= theme.valine.placeholder %>"
+           data-page-size="<%= theme.valine.pageSize %>"></div>
+    </div>
+  <% } %>
+</section>
+<% } %>

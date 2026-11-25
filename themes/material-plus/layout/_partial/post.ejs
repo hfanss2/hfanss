@@ -1,0 +1,41 @@
+<%
+  var raw = post.zhailu || post.excerpt || '';
+  var excerptText = String(raw)
+    .replace(/<[^>]*>/g, '')
+    .replace(/&nbsp;|&#160;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (excerptText.length > 118) excerptText = excerptText.slice(0, 118) + '…';
+  var postUrl = url_for(post.path);
+  var postDate = date(post.date, 'YYYY-MM-DD');
+  var authorName = (theme.widgets && theme.widgets.author && theme.widgets.author.title) || config.title;
+  var thumbSrc = post.img || '/img/post-default-img.png';
+  /* CSS 变量里放同一张图：模糊放大铺底 ≈ 取图片主色填充 letterbox，纯 CSS、不增加请求 */
+  var thumbCss = String(thumbSrc).replace(/['"()\\]/g, function (c) { return encodeURIComponent(c); });
+%>
+<article class="post-card">
+  <div class="post-card__main">
+    <%- partial('categories', {post: post}) %>
+    <%# 标题链接的 ::after 覆盖整张卡片，实现「点任意位置进入文章」 %>
+    <h2 class="post-card__title"><a class="post-card__hit" href="<%= postUrl %>"><%= post.title %></a></h2>
+    <div class="post-card__meta">
+      <span class="meta-item">
+        <svg class="icon" aria-hidden="true"><use href="#i-calendar"></use></svg>
+        <time datetime="<%= postDate %>"><%= postDate %></time>
+      </span>
+      <span class="meta-item">
+        <svg class="icon" aria-hidden="true"><use href="#i-user"></use></svg>
+        <%= authorName %>
+      </span>
+      <% if (post.topimg == true) { %><span class="badge">置顶</span><% } %>
+      <% if (post.newimg == true) { %><span class="badge badge--new">新</span><% } %>
+    </div>
+    <% if (excerptText) { %><p class="post-card__excerpt"><%= excerptText %></p><% } %>
+  </div>
+  <%# 缩略图本身就是进入文章的链接：点图片、模糊铺底、空白都能跳转；
+      tabindex=-1 避免与标题链接重复占用键盘焦点，aria-label 给读屏一个名称 %>
+  <a class="post-card__thumb" href="<%= postUrl %>" style="--thumb:url('<%= thumbCss %>')"
+     aria-label="阅读《<%= post.title %>》" tabindex="-1">
+    <img src="<%= thumbSrc %>" alt="" width="240" height="180" loading="lazy" decoding="async">
+  </a>
+</article>

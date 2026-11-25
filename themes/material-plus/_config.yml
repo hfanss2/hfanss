@@ -1,0 +1,112 @@
+# 【说明·已用】Hexo 把本文件加载为 theme.config，模板里用 theme.xxx 读取；站点根 _config.yml 只放核心与插件配置。
+# 【说明·已用】文件内只保留当前模板/脚本确实读取的配置，每个配置项后标注用途，无冗余项。
+# 【说明·已用】改完本文件后执行 npm run clean && npm run build 才会生效。
+
+# 【章节·已用】1. 构建：hexo-renderer-less 读取 theme.config.less
+less:                               # 【已用】LESS 编译配置组
+  compress: true                    # 【已用】压缩生成的 style.css，减小体积、加快加载
+
+# 【章节·已用】2. 图标与 Logo：head.ejs / header.ejs 读取
+shortcut_icon: /favicon.ico          # 【已用】浏览器标签页图标（favicon）
+nav_logo: /img/Blog_logo.png         # 【已用】导航栏 Logo 图片，CSS 限高 34px（移动端 30px）
+
+# 【章节·已用】3. 导航菜单：header.ejs 同时用于 PC 横排菜单与移动端下拉菜单
+# 【说明·已用】url 以 http(s):// 开头会被识别为外链：红色加粗 + 新标签页打开
+nav_menu:                           # 【已用】平铺显示的主菜单项，顺序即显示顺序
+  - name: 首页                     # 【已用】第 1 项显示文字
+    slug: home                      # 【已用】生成 nav-home 类名，供选中态/样式定位
+    url: /                          # 【已用】站内链接：站点首页
+  - name: 时间轴                   # 【已用】第 2 项显示文字
+    slug: archives                  # 【已用】生成 nav-archives 类名
+    url: /archives/index.html       # 【已用】站内链接：文章归档页
+  - name: 开源项目                 # 【已用】第 3 项显示文字
+    slug: open                      # 【已用】生成 nav-open 类名
+    url: /tags/开源项目/index.html  # 【已用】站内链接：开源项目标签页
+  - name: 友链                     # 【已用】第 4 项显示文字
+    slug: links                     # 【已用】生成 nav-links 类名
+    url: /links/index.html          # 【已用】站内链接：友情链接页
+  - name: 留言板                   # 【已用】第 5 项显示文字
+    slug: comment                   # 【已用】生成 nav-comment 类名
+    url: /comment/index.html        # 【已用】站内链接：留言板页
+
+# 【章节·已用】4.「更多」折叠菜单：header.ejs / _refresh.less / site.js 读取
+# 【说明·已用】PC 鼠标悬停出下拉（移开后延迟 500ms 消失），移动端点击后弹出。
+# 【说明·已用】items 里每一项独立配置 name（显示文字）与 url（跳转地址）；url 以 http(s):// 开头自动识别为外链。
+# 【说明·已用】enable: false 时不折叠，items 会按顺序平铺追加到主菜单末尾，不会丢链接；items 为空则不渲染按钮。
+nav_more:                            # 【已用】「更多」折叠菜单配置组
+  enable: true                       # 【已用】true = 折叠成「更多」；false = 平铺显示
+  label: 更多                        # 【已用】触发按钮显示的文字
+  items:                             # 【已用】下拉/弹出区内的菜单项
+    - name: 热点                    # 【已用】折叠项 1 显示文字
+      url: https://news.hfanss.com  # 【已用】折叠项 1 跳转地址（外链）
+    - name: 视频                    # 【已用】折叠项 2 显示文字
+      url: https://video.hfanss.com # 【已用】折叠项 2 跳转地址（外链）
+    - name: Github图床              # 【已用】折叠项 3 显示文字
+      url: https://pic.hfanss.com   # 【已用】折叠项 3 跳转地址（外链）
+
+# 【章节·已用】5. 博主简介（首页顶部卡片）：profile.ejs / head.ejs 读取
+# 【说明·已用】背景图用 background-size:100% 100% 完整铺满；coverOpacity 是遮罩不透明度，数值越小背景图越清晰
+profile:                            # 【已用】简介卡片外观配置组
+  bg: /img/avatar-bg.jpg            # 【已用】简介卡片背景图
+  coverOpacity: 0.72                # 【已用】遮罩不透明度
+widgets:                            # 【已用】博主信息配置组
+  author:                           # 【已用】首页顶部简介卡片的数据源
+    enable: true                    # 【已用】是否在首页第一页显示简介卡片
+    avatar: /img/author.jpg         # 【已用】头像图片路径
+    title: 幻凡ss                   # 【已用】博主昵称，同时作为文章作者名
+    motto: IT小青年 | hfanss.com    # 【已用】签名/格言，链接到「关于本站」页
+    conum: '>50'                    # 【已用】简介里「评论」条数的展示文案
+
+# 【章节·已用】6. 首页公告：index.ejs 读取，只在首页第一页显示
+topnotice:                          # 【已用】公告栏配置组
+  enable: true                      # 【已用】是否显示首页公告栏
+  content: '用AI优化了一下网站，速度快多了  \‘▽′/'  # 【已用】公告文字内容
+  link: /topmd/index.html           # 【已用】公告文字点击后跳转的站内页面
+
+# 【章节·已用】7. 页脚：footer.ejs / site.js 读取
+runtime:                            # 【已用】站点运行时间配置组
+  enable: true                      # 【已用】是否显示「本站已稳定运行」计时
+  span: 本站已稳定运行：            # 【已用】计时前缀文案
+  year: 2018                        # 【已用】建站起始年份
+  month: 7                          # 【已用】建站起始月份
+  day: 14                           # 【已用】建站起始日期
+  hour: 01                          # 【已用】建站起始小时
+  minute: 01                        # 【已用】建站起始分钟
+  second: 01                        # 【已用】建站起始秒
+# 【说明·已用】运行时间前面的图标：heartbeat(红色心跳心形) | refresh | none
+runtimeIcon: heartbeat              # 【已用】运行时间图标样式
+copyrightIcon: true                 # 【已用】页脚版权前是否显示 © 符号
+copyright: 2018 幻凡ss              # 【已用】页脚版权文字
+bottomlink: true                    # 【已用】是否显示页脚链接组
+baidutongjiurl: https://tongji.baidu.com/main/overview/10000687863/overview/index?siteId=22101032  # 【已用】页脚「百度统计」链接地址
+footerpic: false                    # 【已用】是否在页脚显示加群二维码
+beian: 豫ICP备18024944号-1          # 【已用】页脚备案号文字
+
+# 【章节·已用】8. 社交链接：profile.ejs 读取，图标为本地下载的各品牌官方标识
+qq: https://wpa.qq.com/msgrd?v=3&uin=2158798&site=qq&menu=yes  # 【已用】QQ 临时会话链接
+mail: https://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=8JiWkZ6DsJafiJ2RmZzek5_d  # 【已用】QQ 邮箱写信链接
+github: https://github.com/hfanss2/  # 【已用】GitHub 主页链接
+csdn: https://me.csdn.net/q2158798  # 【已用】CSDN 主页链接
+
+# 【章节·已用】9. 评论与推荐：article.ejs / scripts.ejs / head.ejs 读取
+comments:                           # 【已用】评论卡片配置组
+  enable: true                      # 【已用】是否在文章底部渲染评论/推荐卡片
+  bg: /img/commentbox2-hc.png       # 【已用】留言框背景图
+recommend:                          # 【已用】文章推荐配置组
+  enable: true                      # 【已用】是否显示「文章推荐」列表
+valine:                             # 【已用】Valine 评论配置组，值注入 site-config 供 site.js 读取
+  enable: true                      # 【已用】是否启用 Valine 评论
+  appId: 5GMAO3V5MqR9DTfMnd73m8zT-gzGzoHsz  # 【已用】LeanCloud 应用 AppId
+  appkey: f6Ve1tpYqYSBefe5xp0OCKxR  # 【已用】LeanCloud 应用 AppKey（敏感信息，勿外传）
+  avatar: monsterid                 # 【已用】评论默认头像样式
+  placeholder: '　'                 # 【已用】评论输入框占位提示（全角空格）
+  pageSize: 10                      # 【已用】每页显示的评论条数
+
+# 【章节·已用】10. 搜索：header.ejs 读取（索引由站点级 hexo-generator-search 生成）
+search:                             # 【已用】搜索配置组
+  enable: true                      # 【已用】是否显示顶部搜索按钮与搜索面板
+
+# 【章节·已用】11. 第三方统计与杂项：scripts.ejs / site.js 读取
+changeTitle: 咦，页面崩溃了！         # 【已用】切到后台标签页时显示的标题文字
+baidu_analytics_key: 7e379e642cd39853f41b062fafa891d6  # 【已用】百度统计站点密钥，闲时加载统计脚本
+baidu_push: true                    # 【已用】是否闲时加载百度链接自动推送脚本

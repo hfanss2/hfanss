@@ -1,0 +1,42 @@
+<%
+  function pad2(n) { return ('0' + n).slice(-2); }
+  var rt = theme.runtime || {};
+  var runtimeSince = rt.year + '-' + pad2(rt.month) + '-' + pad2(rt.day)
+    + 'T' + pad2(rt.hour) + ':' + pad2(rt.minute) + ':' + pad2(rt.second);
+  var rtIcon = theme.runtimeIcon || 'heartbeat';
+%>
+<footer class="l_footer">
+  <% if (rt.enable === true) { %>
+  <div class="footer-runtime" id="site-runtime" data-since="<%= runtimeSince %>" data-span="<%= rt.span %>">
+    <% if (rtIcon !== 'none') { %>
+    <svg class="icon footer-runtime__icon<% if (rtIcon === 'heartbeat') { %> is-heartbeat<% } %>" aria-hidden="true"><use href="#i-<%= rtIcon === 'refresh' ? 'refresh' : 'heartbeat' %>"></use></svg>
+    <% } %>
+    <span id="runtime_span"><%= rt.span %></span>
+  </div>
+  <% } %>
+
+  <div class="footer-copyright">
+    <% if (theme.copyrightIcon === true) { %>&copy;<% } %>
+    <%= theme.copyright %>
+    <span class="footer-sep">·</span>
+    <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener"><%= theme.beian %></a>
+  </div>
+
+  <% if (theme.bottomlink) { %>
+  <nav class="footer-links" aria-label="页脚链接">
+    <a href="/links/index.html">友情链接</a>
+    <a href="/about2/index.html">关于博主</a>
+    <a href="/about/index.html">关于本站</a>
+    <a href="<%= theme.baidutongjiurl %>" target="_blank" rel="noopener">百度统计</a>
+  </nav>
+  <% } %>
+
+  <% if (theme.footerpic) { %>
+  <img class="footer-img" src="/img/footer-jiaqunQR.png" alt="">
+  <% } %>
+</footer>
+
+<%# 数学公式仅在文章显式开启 mathjax 时加载 %>
+<% if (page.mathjax == true) { %>
+  <%- partial('mathjax') %>
+<% } %>

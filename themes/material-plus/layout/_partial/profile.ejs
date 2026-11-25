@@ -1,0 +1,52 @@
+<%# 首页顶部的个人简介卡片：数据全部来自主题 _config.yml 的 widgets.author / 社交配置 %>
+<% if (theme.widgets && theme.widgets.author && theme.widgets.author.enable !== false) { %>
+<section class="profile-card" aria-label="博主简介">
+  <div class="profile-avatar-wrap">
+    <img class="profile-avatar" src="<%= url_for(theme.widgets.author.avatar || '/img/author.jpg') %>"
+         alt="<%= theme.widgets.author.title || config.title %>" width="72" height="72"
+         loading="eager" decoding="async">
+  </div>
+
+  <div class="profile-info">
+    <div class="profile-headline">
+      <h1 class="profile-name"><%= theme.widgets.author.title || config.title %></h1>
+      <p class="profile-motto"><a href="<%= url_for('/about/index.html') %>"><%= theme.widgets.author.motto || config.description %></a></p>
+    </div>
+    <div class="profile-stats">
+      <a href="<%= url_for('/archives/index.html') %>">文章 <%= site.posts.length %> 篇</a>
+      <a href="<%= url_for('/tags/index.html') %>">标签 <%= site.tags.length %> 条</a>
+      <a href="<%= url_for('/comment/index.html') %>">评论 <%= theme.widgets.author.conum || '…' %> 条</a>
+      <a href="<%= url_for('/about/index.html') %>">关于我</a>
+    </div>
+  </div>
+
+  <%# 四个品牌图标均为「官方原生标识」且已下载到本地 source/img/brand/：
+      qqmail.png  ← QQ邮箱官网 rescdn.qqmail.com 的官方 Logo（裁出左侧圆形标识）
+      qq.svg      ← Tencent QQ 官方企鹅标识（Simple Icons 品牌路径，填官方蓝 #12B7F5）
+      github.png  ← GitHub 官方 GitHub-Mark（github.githubassets.com）
+      csdn.png    ← CSDN 官网 csdn.net 的官方 favicon（32×32 红底白 C）
+      全部本地引用，运行时不产生任何外链请求。 %>
+  <div class="profile-social" aria-label="社交链接">
+    <% if (theme.mail) { %>
+    <a class="is-mail" href="<%= theme.mail %>" target="_blank" rel="noopener" title="QQ邮箱" aria-label="QQ邮箱">
+      <img src="<%= url_for('/img/brand/qqmail.png') %>" alt="" width="28" height="28" loading="lazy" decoding="async">
+    </a>
+    <% } %>
+    <% if (theme.qq) { %>
+    <a class="is-qq" href="<%= theme.qq %>" target="_blank" rel="noopener" title="QQ" aria-label="QQ">
+      <img src="<%= url_for('/img/brand/qq.svg') %>" alt="" width="28" height="28" loading="lazy" decoding="async">
+    </a>
+    <% } %>
+    <% if (theme.github) { %>
+    <a class="is-github" href="<%= theme.github %>" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">
+      <img src="<%= url_for('/img/brand/github.png') %>" alt="" width="28" height="28" loading="lazy" decoding="async">
+    </a>
+    <% } %>
+    <% if (theme.csdn) { %>
+    <a class="is-csdn" href="<%= theme.csdn %>" target="_blank" rel="noopener" title="CSDN" aria-label="CSDN">
+      <img src="<%= url_for('/img/brand/csdn.png') %>" alt="" width="28" height="28" loading="lazy" decoding="async">
+    </a>
+    <% } %>
+  </div>
+</section>
+<% } %>

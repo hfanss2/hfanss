@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="<%= config.language %>">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%
+    var title = page.title;
+    if (is_archive()) {
+      title = '归档';
+      if (is_month()) title += ': ' + page.year + '/' + page.month;
+      else if (is_year()) title += ': ' + page.year;
+    } else if (is_category()) {
+      title = '分类: ' + page.category;
+    } else if (is_tag()) {
+      title = '标签: ' + page.tag;
+    }
+    /* 展示层资源路径：集中在本主题 _config.yml，内联为 CSS 变量，零额外请求。
+       <style> 是 raw text，HTML 实体不会被解码，故过滤危险字符后原样输出。 */
+    var cssUrl = function (u) { return String(u).replace(/['"<>]/g, ''); };
+    var profileBg = cssUrl((theme.profile && theme.profile.bg) || '/img/avatar-bg.jpg');
+    var profileCover = (theme.profile && theme.profile.coverOpacity != null) ? theme.profile.coverOpacity : 0.86;
+    var commentBg = cssUrl((theme.comments && theme.comments.bg) || '/img/commentbox2-hc.png');
+  %>
+  <title><% if(title){ %><%= title %> - <% } else if (page.titleme) { %><%= (page.titleme) %><% } %><%= config.title %></title>
+  <meta name="description" content="<%= config.description %>" />
+  <% if (page.keywords && config.keywords){ %>
+  <meta name="keywords" content="<%= page.keywords %>, <%= config.keywords %>">
+  <% } else if (page.keywords) { %>
+  <meta name="keywords" content="<%= page.keywords %>">
+  <% } else if (config.keywords) { %>
+  <meta name="keywords" content="<%= config.keywords %>">
+  <% } %>
+  <meta name="google-site-verification" content="q4xnHYM3-sVfNnyEwMGqknU2CTdojzJvQ5nGfN3EJv8" />
+  <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f1115" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="<%= theme.shortcut_icon %>" />
+  <%- css('style.css') %>
+  <style>:root{--profile-bg:url('<%- profileBg %>');--profile-cover:<%= profileCover %>;--comment-bg:url('<%- commentBg %>')}</style>
+</head>

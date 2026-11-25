@@ -1,0 +1,96 @@
+<header class="l_header">
+  <div class="nav-inner">
+    <a class="brand" href="<%= url_for('/') %>" aria-label="<%= config.title %> 首页">
+      <img src="<%= theme.nav_logo %>" alt="<%= config.title %>" width="86" height="34" loading="eager" decoding="async">
+    </a>
+
+    <%
+      /* 菜单渲染序列 seq：nav_menu 为平铺主菜单；nav_more.items（name + url）
+         在 enable:true 时合并成末尾的「更多」，false 时平铺追加到主菜单末尾。
+         url 是否外链由下方循环按 /^https?:\/\// 判断，站内/站外均可配置。 */
+      var moreCfg = theme.nav_more || {};
+      var moreOn = (moreCfg.enable === true);
+      var moreLabel = moreCfg.label || '更多';
+      var moreItems = Array.isArray(moreCfg.items) ? moreCfg.items : [];
+      var navList = theme.nav_menu || [];
+      var seq = navList.map(function (v) { return { more: false, item: v }; });
+      if (moreItems.length) {
+        if (moreOn) {
+          seq.push({ more: true, items: moreItems });
+        } else {
+          moreItems.forEach(function (v) { seq.push({ more: false, item: v }); });
+        }
+      }
+    %>
+
+    <nav class="nav-links" aria-label="主导航">
+      <ul class="h-list">
+        <% seq.forEach(function (node) { %>
+        <% if (!node.more) { var v = node.item, isExt = /^https?:\/\//i.test(v.url); %>
+        <li>
+          <a class="nav-<%= v.slug || 'item' %><% if (isExt) { %> is-external<% } %>" href="<%= url_for(v.url) %>"<% if (isExt) { %> target="_blank" rel="noopener"<% } %>><%= v.name %></a>
+        </li>
+        <% } else { %>
+        <li class="nav-more-item" data-nav-more>
+          <button class="nav-more-toggle" type="button" data-nav-more-toggle aria-haspopup="true" aria-expanded="false" aria-controls="nav-more-menu"><%= moreLabel %><svg class="icon nav-more-caret" aria-hidden="true"><use href="#i-chev-down"></use></svg></button>
+          <ul class="nav-more-menu" id="nav-more-menu">
+            <% node.items.forEach(function (v) { var isExt = /^https?:\/\//i.test(v.url); %>
+            <li>
+              <a class="nav-<%= v.slug || 'item' %><% if (isExt) { %> is-external<% } %>" href="<%= url_for(v.url) %>"<% if (isExt) { %> target="_blank" rel="noopener"<% } %>><%= v.name %></a>
+            </li>
+            <% }) %>
+          </ul>
+        </li>
+        <% } %>
+        <% }) %>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <% if (theme.search && theme.search.enable === true) { %>
+      <button class="icon-btn" id="search-toggle" type="button" aria-label="搜索" aria-expanded="false" aria-controls="search-panel">
+        <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
+      </button>
+      <% } %>
+      <button class="icon-btn" id="menu-toggle" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="mobile-nav">
+        <svg class="icon" aria-hidden="true"><use href="#i-menu"></use></svg>
+      </button>
+    </div>
+  </div>
+
+  <% if (theme.search && theme.search.enable === true) { %>
+  <div class="search-panel" id="search-panel" hidden>
+    <form class="search-form" id="search-form" role="search">
+      <svg class="icon" aria-hidden="true"><use href="#i-search"></use></svg>
+      <input type="search" id="search-input" placeholder="搜索文章标题与内容…" autocomplete="off" aria-label="搜索文章">
+      <button class="icon-btn" id="search-close" type="button" aria-label="关闭搜索">
+        <svg class="icon" aria-hidden="true"><use href="#i-close"></use></svg>
+      </button>
+    </form>
+    <div class="search-results" id="search-results" aria-live="polite"></div>
+  </div>
+  <% } %>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="移动端导航" hidden>
+    <ul>
+      <% seq.forEach(function (node) { %>
+      <% if (!node.more) { var v = node.item, isExt = /^https?:\/\//i.test(v.url); %>
+      <li>
+        <a class="nav-<%= v.slug || 'item' %><% if (isExt) { %> is-external<% } %>" href="<%= url_for(v.url) %>"<% if (isExt) { %> target="_blank" rel="noopener"<% } %>><%= v.name %></a>
+      </li>
+      <% } else { %>
+      <li class="mobile-more-item" data-nav-more>
+        <button class="mobile-more-toggle" type="button" data-nav-more-toggle aria-expanded="false" aria-controls="mobile-more-menu"><%= moreLabel %><svg class="icon mobile-more-caret" aria-hidden="true"><use href="#i-chev-down"></use></svg></button>
+        <ul class="mobile-more-menu" id="mobile-more-menu">
+          <% node.items.forEach(function (v) { var isExt = /^https?:\/\//i.test(v.url); %>
+          <li>
+            <a class="nav-<%= v.slug || 'item' %><% if (isExt) { %> is-external<% } %>" href="<%= url_for(v.url) %>"<% if (isExt) { %> target="_blank" rel="noopener"<% } %>><%= v.name %></a>
+          </li>
+          <% }) %>
+        </ul>
+      </li>
+      <% } %>
+      <% }) %>
+    </ul>
+  </nav>
+</header>

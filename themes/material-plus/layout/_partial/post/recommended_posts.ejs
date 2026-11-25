@@ -1,0 +1,19 @@
+<% var post_list = recommended_posts(page, site) %>
+<% if (post_list.length > 0) { %>
+<section class="recommended_posts" aria-label="文章推荐">
+  <h3 class="recommend-head">
+    <svg class="icon" aria-hidden="true"><use href="#i-bookmark"></use></svg>
+    <span>文章推荐</span>
+  </h3>
+  <ol class="recommend-list">
+    <% post_list.forEach(function(link) { %>
+    <li>
+      <a href="<%= link.permalink %>">
+        <span class="recommend-text"><%= link.title %></span>
+        <svg class="icon recommend-arrow" aria-hidden="true"><use href="#i-chev-right"></use></svg>
+      </a>
+    </li>
+    <% }) %>
+  </ol>
+</section>
+<% } %>
